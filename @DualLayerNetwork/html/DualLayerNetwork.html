@@ -1,0 +1,185 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>DualLayerNetwork</title><meta name="generator" content="MATLAB 8.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2016-06-06"><meta name="DC.source" content="DualLayerNetwork.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Constructor</a></li></ul></div><h2>Constructor<a name="2"></a></h2><pre class="language-matlab">DualLayerNetwork(layer_size, graph_seed, traffic_seed, link_capacity, inter_flow_density, intra_flow_density)
+DualLayerNetwork(model)
+</pre><p><tt>layer_size</tt>: the graph size of each layer. If <tt>layer_size</tt> is scalar, the two     layer have the same size.</p><p><tt>seed</tt>: Seed for initilize the random number generator when build the network     topology.</p><p><tt>traffic_seed</tt>: Seed for initilize the random number generator when create     flow.</p><p><tt>link_capacity</tt>: the link capacity of each layer. If this argument is not     specified, the link capcity is set to 1. If <tt>link_capcity</tt> is a scalar,     the link capacity of the two layer is the same.</p><p><tt>inter_flow_density</tt>: the flow density between RAN cluster node and core     cluster node.</p><p><tt>intra_flow_density</tt>: the flow density between the same cluster.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+classdef DualLayerNetwork < Network
+    %DUALLAYERNETWORK incapsulate the DualLayerGraph class.
+    %   Detailed explanation goes here
+    properties (Constant)
+        UP_DEMAND_MAX = 10;            % tunable parameter
+        UP_DEMAND_MIN = 1;
+        UP_DOWN_RATIO = 1;
+        % INTRA_DEMAND_MAX = 10;
+        % INTRA_DEMAND_MIN = 1;
+        INTRA_DEMAND_MAX0 = 50;
+        INTRA_DEMAND_MIN0 = 5;
+        DOWN_DEMAND_MAX = DualLayerNetwork.UP_DOWN_RATIO*DualLayerNetwork.UP_DEMAND_MAX;
+        DOWN_DEMAND_MIN = DualLayerNetwork.UP_DOWN_RATIO*DualLayerNetwork.UP_DEMAND_MIN;
+    end
+    properties
+        index;
+        node;
+        link;
+        
+        BottomSize;
+        UpperSize;
+        IndirectedLinkNumber;
+    end
+    
+    methods  % Property Mehtods
+        function n = get.UpperSize(this)
+            n = length(this.index.Router);
+        end
+        function n = get.BottomSize(this)
+            n = length(this.index.GBS) + length(this.index.NBS);
+        end
+        function n = get.IndirectedLinkNumber(this)
+            n = length(this.link);
+        end
+    end
+    
+    methods
+        %% Constructor
+        %   DualLayerNetwork(layer_size, graph_seed, traffic_seed, link_capacity, inter_flow_density, intra_flow_density)
+        %   DualLayerNetwork(model)
+        %
+        % |layer_size|: the graph size of each layer. If |layer_size| is scalar, the two
+        %     layer have the same size.
+        %
+        % |seed|: Seed for initilize the random number generator when build the network
+        %     topology.
+        %
+        % |traffic_seed|: Seed for initilize the random number generator when create
+        %     flow.
+        %
+        % |link_capacity|: the link capacity of each layer. If this argument is not
+        %     specified, the link capcity is set to 1. If |link_capcity| is a scalar,
+        %     the link capacity of the two layer is the same.
+        %
+        % |inter_flow_density|: the flow density between RAN cluster node and core
+        %     cluster node.
+        %
+        % |intra_flow_density|: the flow density between the same cluster.
+        function this = DualLayerNetwork(arg1, graph_seed, traffic_seed, ...
+                link_capacity, inter_flow_density, intra_flow_density)
+            if ischar(arg1)
+                model = arg1;
+                load_sample_graph(this, model);
+            else
+                layer_size = arg1;
+                if nargin < 5
+                    error('Error:not enough input arguments.');
+                end
+                if nargin>=8 && isempty(link_capacity)==0
+                    this.graph = DualLayerNetwork.Build(layer_size(1), ...
+                        cluster_size(2), graph_seed, link_capacity);
+                else %not specify the link capacity
+                    this.graph = DualLayerNetwork.Build(cluster_number, ...
+                        cluster_size, graph_seed);
+                end
+            end
+            
+            % do not produce traffic profiles.
+            if nargin <= 2
+                return;
+            end
+            num_traffic_profile = length(traffic_seed);
+            this.TrafficProfiles = cell(num_traffic_profile,1);
+            for j = 1:num_traffic_profile
+                if isempty(intra_flow_density)
+                    this.TrafficProfiles{j} = this.CreateTrafficMatrix(...
+                        traffic_seed(j), inter_flow_density);
+                else
+                    this.flow_table_list{j} = this.CreateTrafficMatrix(...
+                        traffic_seed(j), inter_flow_density, true, intra_flow_density);
+                end
+            end
+            if ~(nargin>=4 && isempty(link_capacity)==0)
+                this.reconfigure_capacity;
+            end
+        end
+        
+        plot(this);
+
+        flow_list = CreateTrafficMatrix(this, seed, inter_density, b_intra, intra_density);
+
+        [theta, b_d, b_u] = MBODA_TE(this, flow_table_index, w);
+        [theta, a] = MFODA_TE( this, flow_table_index, w );
+    end
+    
+    methods (Access = private)
+        load_sample_network(this, model);
+        flow_table = create_flow( this, seed, inter_density, b_intra, intra_density);
+    end
+    
+end
+##### SOURCE END #####
+--></body></html>
