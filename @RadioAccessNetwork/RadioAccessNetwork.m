@@ -47,36 +47,6 @@ classdef RadioAccessNetwork < handle
     end
     
     methods
-        function n = get.NumberWireNode(this)
-            n = size(this.wire_node,1);
-        end
-        function n = get.NumberBS(this)
-            n = length(this.index.GBS) + length(this.index.NBS);
-        end
-        function n = get.NumberActiveBS(this)
-            n = length(this.active_bs_index);
-        end
-        function n = get.NumberFeasibleUser(this)
-            n = length(this.feasible_user_index);
-        end
-        function n =get.NumberActiveUser(this)
-            n = length(this.active_user_index);
-        end
-        function n = get.UserIdOffset(this)
-            n = size(this.wire_node,1);
-        end
-        function n = get.NumberWireLink(this)
-            n = size(this.wire_link,1);
-        end
-        function n = get.NumberUser(this)
-            n = size(this.users,1);
-        end
-        function n = get.NumberRouter(this)
-            n = length(this.index.Router);
-        end
-        function n = get.NumberFlow(this)
-            n = size(this.flow_table,1);
-        end
         function this = RadioAccessNetwork(model, request_prob, coverage, range_user, ...
                 range_demand, sir_th, bs_bandwidth)
             %% RadioAccessNetwork RadioAccessNetwork(model, request_prob, range_user, range_demand, sir_th, bs_bandwidth)
@@ -111,7 +81,7 @@ classdef RadioAccessNetwork < handle
                 CreateFlow(this, 'random');
             end
             update_user_association(this);
-            this.ran_graph = RANGraph.Build(this, 1);
+            this.ran_graph = RANGraph.Build(this, 1);   % RANGraph is missing.
             %% Construct Paths
             this.path_set = PathSet.Build(this);
             if nargin >= 7
@@ -119,6 +89,39 @@ classdef RadioAccessNetwork < handle
             else
                 this.BSBandwidth = 10;
             end
+        end
+    end
+    
+    methods
+        function n = get.NumberWireNode(this)
+            n = size(this.wire_node,1);
+        end
+        function n = get.NumberBS(this)
+            n = length(this.index.GBS) + length(this.index.NBS);
+        end
+        function n = get.NumberActiveBS(this)
+            n = length(this.active_bs_index);
+        end
+        function n = get.NumberFeasibleUser(this)
+            n = length(this.feasible_user_index);
+        end
+        function n =get.NumberActiveUser(this)
+            n = length(this.active_user_index);
+        end
+        function n = get.UserIdOffset(this)
+            n = size(this.wire_node,1);
+        end
+        function n = get.NumberWireLink(this)
+            n = size(this.wire_link,1);
+        end
+        function n = get.NumberUser(this)
+            n = size(this.users,1);
+        end
+        function n = get.NumberRouter(this)
+            n = length(this.index.Router);
+        end
+        function n = get.NumberFlow(this)
+            n = size(this.flow_table,1);
         end
     end
     methods (Access=private)          % prototype declaration

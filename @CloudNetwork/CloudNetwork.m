@@ -1,5 +1,5 @@
 classdef CloudNetwork < FlatNetwork
-    
+    %% TODO: merge into CloudNetwork/CloudNetwork.
     properties
         PhysicGraph;
         server_id;

@@ -12,8 +12,8 @@ classdef (Abstract) Network  < handle
 		fobj;
         
         TrafficProfiles;
-        Size;
-        LinkNumber;
+        Size;               % TODO: rename as NumberNodes
+        LinkNumber;         % TODO: rename as NumberLinks
     end
     properties(Abstract=true)
     end

@@ -109,7 +109,7 @@ classdef FlatNetwork < Network
             if nargin >= 2 && ~isempty(traffic_profiles)
                 network.TrafficProfiles = traffic_profiles;
             end
-            if nargin >=3 && ~isempty(num_path);
+            if nargin >=3 && ~isempty(num_path)
                 network.path_set = PathSet.BuildCandidate(graph, num_path);
             end
         end
