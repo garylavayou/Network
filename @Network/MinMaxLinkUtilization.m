@@ -48,11 +48,11 @@ O2s = [sparse(K*L,1); 0];
 % min  [0 0 ... 0 1]*|F|
 %                    |0|
 % s.t. [A 0]|F| = d
-%           |¦È|
+%           |Î¸|
 %      [I -C].|F| <= 0
-%             |¦È|
+%             |Î¸|
 %      |F| >= 0
-%      |¦È|
+%      |Î¸|
 fs = [sparse(1,K*L) 1];
 opt = optimoptions(@linprog, 'Diagnostics', 'on', 'Algorithm', 'interior-point');
 [F, theta, exitflag, output] = linprog(fs,Is,O1s,As,ds,O2s,[],[],opt);
@@ -69,7 +69,7 @@ F(abs(F)<10^-5)=0;
 %         it first reshap as a (L,K) matrix;
 %         it is transposed as a (K,L) matrix, one row having L variables of the flow.
 flow_variables = (reshape(F(1:end-1), L, K))';
-fprintf('\tLinear programming optimal: ¦È = %.4f(¦Ë = %.4f)\n',theta, 1/theta);
+fprintf('\tLinear programming optimal: Î¸ = %.4f(Î» = %.4f)\n',theta, 1/theta);
 
 end
 

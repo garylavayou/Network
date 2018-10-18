@@ -44,16 +44,16 @@ switch obj_id
     case Objective.MAX_CONCURRENT
         %% objective 1: max-concurrent
         % min  [0 0 ... 0 -1]*|x|
-        %                     |λ|
+        %                     |位|
         % s.t. |H 0|.|x| <= |C|
-        %      |S 0|.|λ|    |R|    -->  b     ****** S*F <= R if n and l are not
+        %      |S 0|.|位|    |R|    -->  b     ****** S*F <= R if n and l are not
         %      incidented, then S(n,l) = 0
         %
         %      |Gs -d|.|x|  = 0    --> O1s
-        %              |λ|
+        %              |位|
         %
         %              |x| >= 0    --> O2s
-        %              |λ|
+        %              |位|
         % Note: Since limited by the concurrent constraint, it does not necessarily
         % achieve max thoughput
         f = [sparse(P,1); -1];
@@ -75,7 +75,7 @@ switch obj_id
         end
         this.fobj.objective = F(end);
         this.fobj.rate = this.fobj.objective*this.flow_table(:,3);
-        fprintf('\tLinear programming optimal: λ = %.4f, system throughput = %.4f\n',...
+        fprintf('\tLinear programming optimal: 位 = %.4f, system throughput = %.4f\n',...
             this.fobj.objective, sum(this.fobj.rate));    
     case {Objective.MAX_MIN, Objective.MAX_MIN_WEIGHT, Objective.PROPORTION_FAIRNESS}
         %% objective 2/3/4: max-min , weighted max-min or proportional fairness

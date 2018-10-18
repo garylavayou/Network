@@ -56,16 +56,16 @@ switch obj_id
     case Objective.MAX_CONCURRENT
         %% objective 1: max-concurrent
         % min  [0 0 ... 0 -1]*|F|
-        %                     |λ|
+        %                     |位|
         % s.t. |IOs 0| |F|    |C|
-        %      |SOs 0|.|λ| <= |R|    -->  b     ****** S*F <= R if n and l are not
+        %      |SOs 0|.|位| <= |R|    -->  b     ****** S*F <= R if n and l are not
         %      incidented, then S(n,l) = 0
         %
         %      |Gs -d|.|F|  = 0
-        %              |λ|
+        %              |位|
         %
         %              |F| >= 0
-        %              |λ|
+        %              |位|
         % Note: Since limited by the concurrent constraint, it does not necessarily
         % achieve max thoughput
         f = [sparse(K*L,1); -1];
@@ -87,7 +87,7 @@ switch obj_id
         end
         this.fobj.objective = F(end);
         this.fobj.rate = this.fobj.objective*this.flow_table(:,3);
-        fprintf('\tLinear programming optimal: λ = %.4f\n',this.fobj.objective);
+        fprintf('\tLinear programming optimal: 位 = %.4f\n',this.fobj.objective);
         this.fobj.f1 = reshape(F(1:L*K), L, K);
         this.fobj.f1(abs(this.fobj.f1)<10^-5) = 0;
     case {Objective.MAX_MIN, Objective.MAX_MIN_WEIGHT, Objective.PROPORTION_FAIRNESS}
@@ -243,12 +243,12 @@ end
 if bitand(OBJ,64) == 0 && bitand(OBJ,32) == 0
     %% step 3: min-resource to eliminate loop
     % min  [1 1 ... 1]*F
-    % s.t. Gs*F = λd
+    % s.t. Gs*F = 位d
     %
     %     0 <= F <= F0 
     f = ones(K*L,1);
     O2s = sparse(K*L,1);
-    %                                            Gs*F(t)=λd
+    %                                            Gs*F(t)=位d
 %     opt = optimoptions(@linprog, 'MaxIter', 1000);
     [F, ~, exitflag, output] = linprog(f,[],[],Gs,Gs*F(1:n_fv),O2s,F(1:n_fv));
     if exitflag ~= 1
