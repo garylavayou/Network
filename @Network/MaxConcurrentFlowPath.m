@@ -94,8 +94,8 @@ while stop_cond<1  	% phases
             path_list = Graph.DijkstraTree(Gl,src,dest_list); 
             f = zeros(L,1);     % total flow amount to be routed on each edge;
             for i=1:n_flow
-                p = path_list{i};    % =>dest_set(i) => flow(i)
-                for r=1:length(p)-1;
+                p = path_list(i);    % =>dest_set(i) => flow(i)
+                for r=1:length(p)-1
                     ei = graph.Inverse(p(r),p(r+1));
                     f(ei) =f(ei) + SingleSourceFlow(i,3);  % accumulate flow;
                 end
@@ -133,7 +133,7 @@ for k = 1:K
     lambda(k) = flow_bandwidth(src,dest)/flow_list(k,3);
 end
 lambda_fptas(1) = min(lambda);
-fprintf('\tFPTAS objective value: ¦Ë = %.4f. (%.1f-approximate)\n', lambda_fptas(1), 1+w);
+fprintf('\tFPTAS objective value: Î» = %.4f. (%.1f-approximate)\n', lambda_fptas(1), 1+w);
 
 %% i-FPTAS
 if ~(b_full_iter && b_full_step)
@@ -152,5 +152,5 @@ for k = 1:K
 end
 lambda_fptas(2) = min(lambda);
 fprintf('\tGap to reach the capacity constraint: t = %.4f\n', g);
-fprintf('\tApproximate objective value: ¦Ë = %.4f. (Modified)\n', lambda_fptas(2));
+fprintf('\tApproximate objective value: Î» = %.4f. (Modified)\n', lambda_fptas(2));
 

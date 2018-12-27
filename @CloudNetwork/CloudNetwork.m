@@ -53,7 +53,7 @@ classdef CloudNetwork < FlatNetwork
                 dest_set = this.server_id;
                 [path_list, k] = this.graph.CandidatePaths(K, src, dest_set);
                 for j=1:k
-                    this.path_set.AddPath(path_list{j});
+                    this.path_set.AddPath(path_list(j));
                 end
             end
             

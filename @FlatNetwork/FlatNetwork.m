@@ -68,7 +68,7 @@ classdef FlatNetwork < Network
                     dest = flow_list(i,2);
                     [path_list, k] = this.graph.CandidatePaths(K, src, dest);
                     for j=1:k
-                        this.path_set.AddPath(path_list{j});
+                        this.path_set.AddPath(path_list(j));
                     end
                 end
             else

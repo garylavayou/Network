@@ -131,8 +131,8 @@ while stop_cond<1  	% phases
 % keep records of path can be time expensive as dijkstra
             fe = zeros(n_flow,L);     %  flow amount to be routed on each edge;
             for i=1:n_flow
-                p = path_list{i};    % =>dest_set(i) => flow(i)
-                for r=1:length(p)-1;
+                p = path_list(i);    % =>dest_set(i) => flow(i)
+                for r=1:length(p)-1
                     ei = graph.Inverse(p(r),p(r+1));
                     fe(i,ei) =fe(i,ei) + SingleSourceFlow(i,3);  % accumulate flow;
                 end
@@ -181,12 +181,12 @@ lambda_fptas(1) = min(lambda);
 if nargout >= 5
     rt(1) = toc;
 end
-fprintf('\tFPTAS objective value: ¦Ë = %.4f. (%.1f-approximate)\n', lambda_fptas(1), 1+w);
+fprintf('\tFPTAS objective value: Î» = %.4f. (%.1f-approximate)\n', lambda_fptas(1), 1+w);
 if nargout >= 5
     tic;
 end
 for k = 1:K
-    % let AF = ¦Ðd
+    % let AF = Î»d
     % lambda_fptas <= lambda(k)
     flow_variables(k,:) = flow_variables(k,:)*lambda_fptas(1)/lambda(k);    
 end
@@ -199,7 +199,7 @@ end
 flow_variables = flow_variables*gp;
 lambda_fptas(2) = lambda_fptas(1)*gp;
 fprintf('\tGap to reach the capacity constraint: t = %.4f\n', gp);
-fprintf('\tApproximate objective value: ¦Ë = %.4f. (Modified)\n', lambda_fptas(2));
+fprintf('\tApproximate objective value: Î» = %.4f. (Modified)\n', lambda_fptas(2));
 if nargout >= 5
     rt(2) = toc;
     rt(1) = rt(2) + rt(1);
